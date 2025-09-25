@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.time.Instant;
 
 public class Login extends AppCompatActivity {
+    //ประกาศตัวแปร ปุ่มไปหน้าลงทะเบียน
     private Button BRegister;
 
 
@@ -38,6 +39,9 @@ public class Login extends AppCompatActivity {
                 startActivity(Register);
             }
         });
+
+
+
 
 
 
