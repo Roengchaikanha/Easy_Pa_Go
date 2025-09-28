@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import java.time.Instant;
 
-public class Login extends AppCompatActivity {
+public class   Login extends AppCompatActivity {
     //ประกาศตัวแปร ปุ่มไปหน้าลงทะเบียน
     private Button BRegister;
 
@@ -24,7 +24,7 @@ public class Login extends AppCompatActivity {
 
     //login --> User,Password
     EditText user,password;
-    Button bt;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,31 +38,27 @@ public class Login extends AppCompatActivity {
         });
         //ปุ่มไปหน้า Register
         BRegister = findViewById(R.id.buttonRegister);
-        BRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.out.println("Register จะเอ๋!!");
-                Intent Register = new Intent(getApplicationContext(),Register.class);
-                startActivity(Register);
+        BRegister.setOnClickListener(view -> {
+            System.out.println("Register จะเอ๋!!");
+            Intent Register = new Intent(getApplicationContext(),Register.class);
+            startActivity(Register);
 
-        //User,Password,ButtonLogin
-        user = (EditText) findViewById(R.id.editUser);
-        password = (EditText) findViewById(R.id.editPassword);
+    //User,Password,ButtonLogin
+    user = findViewById(R.id.editUser);
+    password = findViewById(R.id.editPassword);
 
-        Blogin = (Button)findViewById(R.id.buttonLogin);
-        Blogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (user.getText().toString().equals("6712247012")&&password.getText().toString().equals("1234")) {
-                    Intent Login = new Intent(getApplicationContext(), UserInterface.class);
-                    startActivity(Login);
-                }else {
-                    Toast.makeText(getApplicationContext(),"รหัสผ่านไม่ถูกต้อง",Toast.LENGTH_LONG).show();
-                }
-
-            }
-        });
-            }
+    Blogin = findViewById(R.id.buttonLogin);
+    Blogin.setOnClickListener(view1 -> {
+        if (user.getText().toString().trim().equals("1234")
+                && password.getText().toString().trim().equals("1234")) {
+            Intent UserInterface = new Intent(getApplicationContext(), UserInterface.class);
+            startActivity(UserInterface);
+            System.out.println("Login Success");
+        } else {
+            Toast.makeText(getApplicationContext(), "ชื่อผุ้ใช้หรือรหัสผ่านไม่ถูกต้อง", Toast.LENGTH_LONG).show();
+        }
+        System.out.println("Login Fail");
+    });
         });
 
 
