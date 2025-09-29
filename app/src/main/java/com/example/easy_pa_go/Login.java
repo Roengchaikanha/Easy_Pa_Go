@@ -23,7 +23,7 @@ public class Login extends AppCompatActivity {
     private Button Blogin;
 
     //login --> User,Password
-    EditText user,password;
+    EditText user, password;
     Button bt;
 
     @Override
@@ -42,36 +42,27 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 System.out.println("Register จะเอ๋!!");
-                Intent Register = new Intent(getApplicationContext(),Register.class);
+                Intent Register = new Intent(getApplicationContext(), Register.class);
                 startActivity(Register);
+            }
+        });
 
         //User,Password,ButtonLogin
         user = (EditText) findViewById(R.id.editUser);
         password = (EditText) findViewById(R.id.editPassword);
 
-        Blogin = (Button)findViewById(R.id.buttonLogin);
+        Blogin = (Button) findViewById(R.id.buttonLogin);
         Blogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (user.getText().toString().equals("6712247012")&&password.getText().toString().equals("1234")) {
+                if (user.getText().toString().equals("6712247012") && password.getText().toString().equals("1234")) {
                     Intent Login = new Intent(getApplicationContext(), UserInterface.class);
                     startActivity(Login);
-                }else {
-                    Toast.makeText(getApplicationContext(),"รหัสผ่านไม่ถูกต้อง",Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "รหัสผ่านไม่ถูกต้อง", Toast.LENGTH_LONG).show();
                 }
 
             }
         });
-            }
-        });
-
-
-
-
-
-
-
-
-
     }
 }

@@ -27,12 +27,12 @@ public class Register extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        //ุ่มกลับไปหน้าlogin
+        //ปุ่มกลับไปหน้าlogin
         Bbacktologin = findViewById(R.id.Bblacktologin);
         Bbacktologin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("Black to logion");
+                System.out.println("Back to login");
                 Intent Login = new Intent(getApplicationContext(),Login.class);
                 startActivity(Login);
             }
