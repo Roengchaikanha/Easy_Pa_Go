@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#27A2B0">
+    android:background="#006064"> <!-- สีพื้นหลังหลัก -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,282 +10,157 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- ปุ่มย้อนกลับ + ไอคอนโปรไฟล์ -->
+        <!-- ===== ส่วนบน: ปุ่มย้อนกลับ + ไอคอนโปรไฟล์ ===== -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="space_between"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#FFB300"
-                android:text="ย้อนกลับ"
-                android:textColor="@android:color/white" />
+            <!-- ปุ่มย้อนกลับ -->
 
+            <!-- ไอคอนโปรไฟล์ -->
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginEnd="8dp"
+                android:src="@android:drawable/sym_def_app_icon"
                 android:background="@android:color/darker_gray"
                 android:scaleType="centerCrop"
-                android:src="@android:drawable/sym_def_app_icon" />
+                android:layout_marginStart="8dp"
+                android:layout_gravity="center_vertical" />
         </LinearLayout>
 
-        <!-- หัวข้อ -->
+        <!-- ===== หัวข้อหลัก ===== -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:gravity="center"
             android:text="ค้นหาห้องเรียน"
-            android:textColor="@android:color/white"
             android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:textStyle="bold"
             android:gravity="center"
-            android:text="ตารางเรียน 1/2569\nนายเรืองชัย กัญหา"
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:layout_marginTop="12dp" />
 
-        <!-- ======================= จันทร์ ======================= -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:text="ตารางเรียน 1/2569\nนายเรืองชัย กัญหา"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="4dp" />
+
+        <!-- ===== ตารางเรียนแต่ละวัน ===== -->
+        <!-- ใช้ TableLayout + TableRow พร้อมสีแยกสถานะชัดเจน -->
+        <!-- ตัวอย่างวันจันทร์ -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:background="#1976D2"
             android:padding="8dp"
             android:text="จันทร์"
             android:textColor="@android:color/white"
+            android:textStyle="bold"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="16dp" />
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="1">
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal"
+            android:stretchColumns="*">
 
-            <TableRow>
+            <!-- คาบเรียน 1 -->
+            <TableRow
+                android:layout_marginBottom="2dp"
+                android:background="#E3F2FD">
 
                 <TextView
+                    android:layout_width="64dp"
+                    android:layout_height="match_parent"
+                    android:background="#C8E6C9"
+                    android:gravity="center"
                     android:padding="8dp"
                     android:text="ปกติ"
                     android:textColor="@android:color/holo_green_dark" />
 
                 <TextView
+                    android:layout_height="52dp"
+                    android:background="#FFFFFF"
                     android:padding="8dp"
-                    android:text="การออกแบบระบบดิจิทัล\n08:30-12:30"
+                    android:text="การออกแบบระบบดิจิทัล \n          08:30-12:30"
                     android:textColor="@android:color/black" />
 
-                <TextView
-                    android:padding="8dp"
-                    android:text="IT105"
-                    android:textColor="@android:color/black" />
             </TableRow>
 
-            <TableRow>
+            <!-- คาบเรียน 2 -->
+            <TableRow
+                android:layout_marginBottom="2dp"
+                android:background="#FFEBEE">
 
                 <TextView
+                    android:layout_height="match_parent"
+                    android:background="#FFCDD2"
+                    android:gravity="center"
                     android:padding="8dp"
                     android:text="ยกเลิกสลับ"
                     android:textColor="@android:color/holo_red_dark" />
 
                 <TextView
+                    android:background="#FFFFFF"
                     android:padding="8dp"
-                    android:text="เครือข่ายคอมพิวเตอร์\n13:30-17:30"
+                    android:text="เครือข่ายคอมพิวเตอร์\n          13:30-17:30"
                     android:textColor="@android:color/black" />
 
-                <TextView
-                    android:padding="8dp"
-                    android:text="IT105"
-                    android:textColor="@android:color/black" />
             </TableRow>
         </TableLayout>
 
-        <!-- ======================= อังคาร ======================= -->
+        <!-- ตัวอย่างวันอังคาร -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:background="#1976D2"
             android:padding="8dp"
             android:text="อังคาร"
             android:textColor="@android:color/white"
+            android:textStyle="bold"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="12dp" />
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="1">
+            android:stretchColumns="*"
+            android:layout_marginTop="4dp">
 
-            <TableRow>
+            <TableRow
+                android:background="#E3F2FD"
+                android:layout_marginBottom="2dp">
 
                 <TextView
-                    android:padding="8dp"
                     android:text="ปกติ"
-                    android:textColor="@android:color/holo_green_dark" />
+                    android:padding="8dp"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:gravity="center"
+                    android:background="#C8E6C9" />
 
                 <TextView
+                    android:layout_height="match_parent"
+                    android:background="#FFFFFF"
                     android:padding="8dp"
                     android:text="ระบบฐานข้อมูลและอิเล็กทรอนิกส์\n08:30-12:30"
                     android:textColor="@android:color/black" />
 
-                <TextView
-                    android:padding="8dp"
-                    android:text="TECHNO6202"
-                    android:textColor="@android:color/black" />
             </TableRow>
         </TableLayout>
 
-        <!-- ======================= พุธ ======================= -->
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="#1976D2"
+            android:background="#FFFFFF"
             android:padding="8dp"
-            android:text="พุธ"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:text="การออกแบบระบบดิจิทัล\n08:30-12:30"
+            android:textColor="@android:color/black"  android:layout_height= "" android:layout_width=""/>
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="1">
-
-            <TableRow>
-
-                <TextView
-                    android:padding="8dp"
-                    android:text="ว่าง"
-                    android:textColor="@android:color/darker_gray" />
-
-                <TextView
-                    android:padding="8dp"
-                    android:text="" />
-
-                <TextView
-                    android:padding="8dp"
-                    android:text="" />
-            </TableRow>
-        </TableLayout>
-
-        <!-- ======================= พฤหัสบดี ======================= -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="#1976D2"
-            android:padding="8dp"
-            android:text="พฤหัสบดี"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="1">
-
-            <TableRow>
-
-                <TextView
-                    android:padding="8dp"
-                    android:text="ปกติ"
-                    android:textColor="@android:color/holo_green_dark" />
-
-                <TextView
-                    android:padding="8dp"
-                    android:text="วัสดุวิศวกรรม\n08:30-12:30"
-                    android:textColor="@android:color/black" />
-
-                <TextView
-                    android:padding="8dp"
-                    android:text="IT105 (คอม)"
-                    android:textColor="@android:color/black" />
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:padding="8dp"
-                    android:text="ปกติ"
-                    android:textColor="@android:color/holo_green_dark" />
-
-                <TextView
-                    android:padding="8dp"
-                    android:text="การเขียนโปรแกรมคอมพิวเตอร์เบื้องต้น\n13:30-17:30"
-                    android:textColor="@android:color/black" />
-
-                <TextView
-                    android:padding="8dp"
-                    android:text="TECHNO4207"
-                    android:textColor="@android:color/black" />
-            </TableRow>
-        </TableLayout>
-
-        <!-- ======================= ศุกร์ ======================= -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:background="#1976D2"
-            android:padding="8dp"
-            android:text="ศุกร์"
-            android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="1">
-
-            <TableRow>
-
-                <TextView
-                    android:padding="8dp"
-                    android:text="ปกติ"
-                    android:textColor="@android:color/holo_green_dark" />
-
-                <TextView
-                    android:padding="8dp"
-                    android:text="งานทั่วไปเชิงประจำวัน\n08:30-12:30"
-                    android:textColor="@android:color/black" />
-
-                <TextView
-                    android:padding="8dp"
-                    android:text="TECHNO5209"
-                    android:textColor="@android:color/black" />
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:padding="8dp"
-                    android:text="ปกติ"
-                    android:textColor="@android:color/holo_green_dark" />
-
-                <TextView
-                    android:padding="8dp"
-                    android:text="การประยุกต์ใช้งานคอมพิวเตอร์ในภาคปฏิบัติ\n13:30-17:30"
-                    android:textColor="@android:color/black" />
-
-                <TextView
-                    android:padding="8dp"
-                    android:text="PIBUL303"
-                    android:textColor="@android:color/black" />
-            </TableRow>
-        </TableLayout>
+        <!-- ===== สามารถคัดลอก TableLayout สำหรับวันพุธ-ศุกร์ แล้วเปลี่ยนข้อมูลได้ ===== -->
 
     </LinearLayout>
 </ScrollView>
