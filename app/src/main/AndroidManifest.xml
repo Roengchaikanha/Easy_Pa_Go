@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -14,13 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Easy_Pa_Go">
         <activity
+            android:name=".UserInterface"
+            android:exported="false" />
+        <activity
+            android:name=".Showdatabase"
+            android:exported="false" />
+        <activity
             android:name=".Register"
             android:exported="true" />
         <activity
             android:name=".Map"
-            android:exported="true" />
-        <activity
-            android:name=".UserInterface"
             android:exported="true" />
         <activity
             android:name=".Login"

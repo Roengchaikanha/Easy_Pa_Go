@@ -19,10 +19,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.018" />
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="208dp"
-        tools:layout_editor_absoluteY="262dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
