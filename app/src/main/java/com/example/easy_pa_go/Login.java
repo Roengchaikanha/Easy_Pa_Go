@@ -41,7 +41,7 @@ public class Login extends AppCompatActivity {
         BRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("Register จะเอ๋!!");
+                System.out.println("Register");
                 Intent Register = new Intent(getApplicationContext(), Register.class);
                 startActivity(Register);
             }
