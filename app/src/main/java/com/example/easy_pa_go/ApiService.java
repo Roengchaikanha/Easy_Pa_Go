@@ -8,6 +8,7 @@ import retrofit2.http.POST;
 
 public interface ApiService {
 
+
     /**
      * ส่งข้อมูล user และ password ไปให้ login.php ตรวจสอบ
      */
@@ -38,4 +39,12 @@ public interface ApiService {
     Call<MajorResponse> getMajors();
 
     // ในอนาคตเราจะมาเพิ่มคำสั่ง API อื่นๆ ที่นี่
+    // ... (เมธอด login, register, getMajors ของเดิม) ...
+
+    /**
+     * ส่ง major_id ไปให้ get_schedule.php เพื่อดึงข้อมูลตารางเรียน
+     */
+    @FormUrlEncoded
+    @POST("get_schedule.php")
+    Call<ScheduleResponse> getSchedule(@Field("major_id") String majorId);
 }

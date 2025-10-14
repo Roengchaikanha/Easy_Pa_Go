@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import retrofit2.Call;
@@ -21,6 +24,8 @@ public class Login extends AppCompatActivity {
     private EditText passwordEditText;
     private Button loginButton;
     private Button goToRegisterButton;
+    private ProgressBar loadingProgressBar;
+    private View loginLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +42,16 @@ public class Login extends AppCompatActivity {
      */
     private void initializeViews() {
         // <<<<< แก้ไขจุดที่ 1 >>>>>
-        // ของเดิม: findViewById(R.id.editPassword)
-        // แก้เป็น: R.id.editUser ให้ตรงกับช่องกรอก User
+        // แก้ไข ID ให้ตรงกับไฟล์ activity_login.xml
         userIdEditText = findViewById(R.id.editUser);
-
-        // บรรทัดนี้ถูกต้องแล้ว
         passwordEditText = findViewById(R.id.editPassword);
-
-        // บรรทัดนี้ถูกต้องแล้ว
         loginButton = findViewById(R.id.buttonLogin);
-
-        // <<<<< แก้ไขจุดที่ 2 >>>>>
-        // ของเดิม: findViewById(R.id.Register)
-        // แก้เป็น: R.id.buttonRegister ให้ตรงกับ ID ของปุ่ม Register
         goToRegisterButton = findViewById(R.id.Register);
+
+        // <<<<< เพิ่มเข้ามาใหม่ >>>>>
+        // เชื่อมตัวแปรสำหรับ ProgressBar และ Layout หลัก
+        loadingProgressBar = findViewById(R.id.loadingProgressBar);
+        loginLayout = findViewById(R.id.buttonLogin);
     }
 
     /**
@@ -87,6 +88,9 @@ public class Login extends AppCompatActivity {
             return;
         }
 
+        // <<<<< เพิ่มเข้ามาใหม่ >>>>>
+        // แสดง ProgressBar ก่อนเริ่มส่งข้อมูล
+        showLoading(true);
         performLogin(userId, password);
     }
 
@@ -104,29 +108,57 @@ public class Login extends AppCompatActivity {
                     LoginResponse loginResponse = response.body();
 
                     if ("success".equals(loginResponse.getStatus())) {
-                        Toast.makeText(Login.this, "ล็อกอินสำเร็จ!", Toast.LENGTH_SHORT).show();
+                        // --- ล็อกอินสำเร็จ ---
+                        // <<<<< แก้ไขส่วนนี้ทั้งหมด >>>>>
 
-                        // ไปยังหน้า UserInterface หลังจากล็อกอินสำเร็จ
-                        Intent intent = new Intent(Login.this, UserInterface.class);
-                        String userMajorId = loginResponse.getUser().getMajorId();
-                        intent.putExtra("USER_MAJOR_ID", userMajorId);
-                        startActivity(intent);
-                        finish(); // ปิดหน้า Login ทิ้งไปเลย
+                        // 1. สร้างข้อความต้อนรับ
+                        String welcomeMessage = "ยินดีต้อนรับคุณ " + loginResponse.getUser().getFirstName();
+                        Toast.makeText(Login.this, welcomeMessage, Toast.LENGTH_SHORT).show();
+
+                        // 2. หน่วงเวลา 2 วินาที (2000 milliseconds)
+                        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                            // 3. สร้าง Intent และแนบข้อมูล
+                            Intent intent = new Intent(Login.this, UserInterface.class);
+                            intent.putExtra("USER_MAJOR_ID", loginResponse.getUser().getMajorId());
+                            intent.putExtra("USER_FULL_NAME", loginResponse.getUser().getFirstName() + " " + loginResponse.getUser().getLastName());
+
+                            // 4. เริ่มเดินทางและปิดหน้าปัจจุบัน
+                            startActivity(intent);
+                            finish();
+                        }, 2000); // 2000ms = 2 วินาที
 
                     } else {
+                        // --- ล็อกอินไม่สำเร็จ ---
+                        showLoading(false); // ซ่อน ProgressBar
                         Toast.makeText(Login.this, loginResponse.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 } else {
+                    showLoading(false);
                     Toast.makeText(Login.this, "การล็อกอินผิดพลาด", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
+                showLoading(false); // ซ่อน ProgressBar
                 Toast.makeText(Login.this, "การเชื่อมต่อล้มเหลว: " + t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.e("LoginActivity", "API Call Failed: ", t);
             }
         });
+    }
+
+    /**
+     * <<<<< เพิ่มเมธอดนี้เข้ามาใหม่ทั้งหมด >>>>>
+     * เมธอดสำหรับควบคุมการแสดงผลของ ProgressBar และฟอร์ม Login
+     */
+    private void showLoading(boolean isLoading) {
+        if (isLoading) {
+            loadingProgressBar.setVisibility(View.VISIBLE);
+            loginLayout.setVisibility(View.GONE);
+        } else {
+            loadingProgressBar.setVisibility(View.GONE);
+            loginLayout.setVisibility(View.VISIBLE);
+        }
     }
 }
 

@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
 
     // ***** แก้ไขตรงนี้เป็น IP Address ของเครื่องคุณ *****
-    public static final String BASE_URL = "http://192.168.1.31/project_epg/";
+    public static final String BASE_URL = "http://192.168.1.112/project_epg/";
 
     private static Retrofit retrofit = null;
 
