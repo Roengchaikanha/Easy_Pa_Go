@@ -1,7 +1,7 @@
 package com.example.easy_pa_go;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -49,7 +49,7 @@ public class Register extends AppCompatActivity {
         passwordEditText = findViewById(R.id.editTextPasswordReg);
         confirmPasswordEditText = findViewById(R.id.editTextConfirmPassword);
         majorSpinner = findViewById(R.id.spinnerMajor);
-        registerButton = findViewById(R.id.buttonRegister);
+        registerButton = findViewById(R.id.Register);
         backToLoginButton = findViewById(R.id.buttonBackToLogin);
     }
 
