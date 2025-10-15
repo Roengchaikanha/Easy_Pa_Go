@@ -5,18 +5,18 @@ import com.google.gson.annotations.SerializedName;
 /**
  * คลาสนี้ทำหน้าที่เป็น "พิมพ์เขียว" หรือ Model
  * สำหรับข้อมูลตารางเรียนแต่ละรายการที่ได้รับมาจากเซิร์ฟเวอร์
- * เป็นไปตามหลัก OOP และใช้ camelCase
+ * เราจะใช้ camelCase ตามกฎที่เราตั้งไว้
  */
 public class ScheduleItem {
 
-    @SerializedName("course_id")
-    private String courseId;
-
-    @SerializedName("course_name")
-    private String courseName;
-
     @SerializedName("day")
     private String day;
+
+    @SerializedName("status")
+    private String status;
+
+    @SerializedName("course_id")
+    private String courseId;
 
     @SerializedName("start_time")
     private String startTime;
@@ -24,26 +24,20 @@ public class ScheduleItem {
     @SerializedName("end_time")
     private String endTime;
 
-    @SerializedName("building_name")
-    private String buildingName;
-
-    @SerializedName("room_number")
-    private String roomNumber;
-
     @SerializedName("location_id")
     private String locationId;
 
     // --- Getter methods ---
-    public String getCourseId() {
-        return courseId;
-    }
-
-    public String getCourseName() {
-        return courseName;
-    }
-
     public String getDay() {
         return day;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public String getCourseId() {
+        return courseId;
     }
 
     public String getStartTime() {
@@ -54,16 +48,7 @@ public class ScheduleItem {
         return endTime;
     }
 
-    public String getBuildingName() {
-        return buildingName;
-    }
-
-    public String getRoomNumber() {
-        return roomNumber;
-    }
-
     public String getLocationId() {
         return locationId;
     }
 }
-

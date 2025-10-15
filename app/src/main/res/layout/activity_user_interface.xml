@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".UserInterface">
 
-    <!-- 1. แถบเมนูด้านบน (Toolbar) -->
+    <!-- แถบเมนูด้านบน (Toolbar) -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -15,31 +15,19 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="ตารางเรียน" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <!-- 2. พื้นที่สำหรับแสดงรายการตารางเรียน -->
-    <!-- RecyclerView คือเครื่องมือสำหรับแสดงรายการข้อมูลจำนวนมากได้อย่างมีประสิทธิภาพ -->
+    <!-- พื้นที่สำหรับแสดงรายการตารางเรียน -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/scheduleRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/userNameTextView"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-    <!-- 3. ข้อความแสดงชื่อผู้ใช้ที่ด้านล่าง -->
-    <TextView
-        android:id="@+id/userNameTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#DDDDDD"
-        android:gravity="center"
-        android:padding="12dp"
-        android:text="ชื่อผู้ใช้งาน"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/item_schedule"
+        android:paddingTop="8dp"
+        android:clipToPadding="false"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ShowData">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- รูปภาพตึก (ตอนนี้จะใช้สีพื้นหลังไปก่อน) -->
+    <ImageView
+        android:id="@+id/buildingImageView"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:background="#CCCCCC"
+        android:scaleType="centerCrop"
+        android:contentDescription="Building Image Placeholder" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- ชื่อตึก -->
+        <TextView
+            android:id="@+id/buildingNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            tools:text="อาคารเทคโนโลยีสารสนเทศ" />
+
+        <!-- ชั้น -->
+        <TextView
+            android:id="@+id/floorTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            tools:text="ชั้น: 3" />
+
+        <!-- ห้อง -->
+        <TextView
+            android:id="@+id/roomTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            tools:text="ห้อง: 309" />
+
+        <!-- ชนิดห้อง -->
+        <TextView
+            android:id="@+id/roomTypeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            tools:text="ชนิดห้อง: คอม" />
+
+        <!-- จำนวนที่นั่ง -->
+        <TextView
+            android:id="@+id/capacityTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="18sp"
+            tools:text="จำนวนที่นั่ง: 40" />
+
+        <!-- เพิ่ม Space ให้ปุ่มอยู่ด้านล่าง -->
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <!-- ปุ่มไปหน้าแผนที่ -->
+        <Button
+            android:id="@+id/goToMapButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:text="เปิดแผนที่นำทาง"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
