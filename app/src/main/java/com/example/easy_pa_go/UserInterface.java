@@ -82,10 +82,6 @@ public class UserInterface extends AppCompatActivity {
     }
 
 
-
-
-
-
     // --- พิมพ์เขียวสำหรับข้อมูล (Model Classes) ---
     public static class ScheduleItem {
         @SerializedName("day") private String day;
@@ -95,7 +91,7 @@ public class UserInterface extends AppCompatActivity {
         @SerializedName("end_time") private String endTime;
         @SerializedName("location_id") private String locationId;
 
-        // Getters
+        // Getters ดึงค่ามาแสดงตามที่ return
         public String getDay() { return day; }
         public String getStatus() { return status; }
         public String getCourseId() { return courseId; }

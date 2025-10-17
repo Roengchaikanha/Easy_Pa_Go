@@ -154,7 +154,6 @@ public class ShowData extends AppCompatActivity {
         public LocationItem getData() { return data; }
     }
 }
-
 //คลาสนี้เป็น Activity ที่
 //รับค่า LOCATION_ID มาจาก Database
 //ดึงข้อมูลจาก API
