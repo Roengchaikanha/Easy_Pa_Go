@@ -19,7 +19,7 @@ import retrofit2.Response;
 
 public class Login extends AppCompatActivity {
 
-    // --- ประกาศตัวแปร UI ด้วย camelCase ---
+    // --- ประกาศตัวแปร UI  ---
     private EditText userIdEditText;
     private EditText passwordEditText;
     private Button loginButton;
@@ -36,16 +36,17 @@ public class Login extends AppCompatActivity {
         setupButtonClickListeners();
     }
 
-    /**
-     * เมธอดสำหรับเชื่อมตัวแปรกับ View ใน Layout
-     * แก้ไข ID ให้ถูกต้องตามไฟล์ XML ของคุณ
-     */
+    //เมธอดสำหรับเชื่อมตัวแปรกับ View ใน Layout
+      //แก้ไข ID ให้ถูกต้องตามไฟล์ XML ของคุณ
+
     private void initializeViews() {
-        // <<<<< แก้ไขจุดที่ 1 >>>>>
-        // แก้ไข ID ให้ตรงกับไฟล์ activity_login.xml
+        // เชื่อมตัวแปร userIdEditText กับช่องกรอกชื่อผู้ใช้ (EditText) ใน layout
         userIdEditText = findViewById(R.id.editUser);
+        // เชื่อมตัวแปร passwordEditText กับช่องกรอกรหัสผ่าน (EditText) ใน layout
         passwordEditText = findViewById(R.id.editPassword);
+        //เชื่อมตัวแปร loginButton กับปุ่ม "เข้าสู่ระบบ" ใน layout
         loginButton = findViewById(R.id.buttonLogin);
+        // เชื่อมตัวแปร goToRegisterButton กับปุ่ม "ไปหน้าสมัครสมาชิก" ใน layout
         goToRegisterButton = findViewById(R.id.Register);
 
         // <<<<< เพิ่มเข้ามาใหม่ >>>>>
@@ -54,31 +55,35 @@ public class Login extends AppCompatActivity {
         loginLayout = findViewById(R.id.buttonLogin);
     }
 
-    /**
-     * เมธอดสำหรับจัดการการคลิกปุ่มทั้งหมดในหน้านี้
-     */
+    //เมธอดสำหรับจัดการการคลิกปุ่มทั้งหมดในหน้านี้
     private void setupButtonClickListeners() {
-        // ตั้งค่าปุ่ม "เข้าสู่ระบบ" (GO)
+        // ตั้งค่าการทำงานเมื่อกดปุ่ม "เข้าสู่ระบบ"
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // เมื่อผู้ใช้กดปุ่ม จะเรียกฟังก์ชัน validateAndLoginUser()
+                // เพื่อตรวจสอบข้อมูลที่กรอก (user_id, password)
+                // และส่งไปตรวจสอบกับฐานข้อมูลผ่าน API
                 validateAndLoginUser();
             }
         });
 
-        // ตั้งค่าปุ่ม "ไปหน้าลงทะเบียน" (Register)
+        // ตั้งค่าการทำงานเมื่อกดปุ่ม "ไปหน้าสมัครสมาชิก"
         goToRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // เมื่อผู้ใช้กดปุ่ม จะสร้าง Intent เพื่อเปลี่ยนหน้า
+                // จากหน้า Login ไปยังหน้า Register
                 Intent intent = new Intent(Login.this, Register.class);
+                // เริ่มหน้า RegisterActivity
                 startActivity(intent);
             }
         });
     }
 
-    /**
-     * เมธอดสำหรับตรวจสอบข้อมูลและเริ่มกระบวนการล็อกอิน
-     */
+
+    //เมธอดสำหรับตรวจสอบข้อมูลและเริ่มกระบวนการล็อกอิน
+
     private void validateAndLoginUser() {
         String userId = userIdEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
@@ -94,9 +99,7 @@ public class Login extends AppCompatActivity {
         performLogin(userId, password);
     }
 
-    /**
-     * เมธอดสำหรับส่งข้อมูลล็อกอินไปที่เซิร์ฟเวอร์
-     */
+    // ฟังก์ชันนี้ใช้สำหรับส่งข้อมูล userId และ password ไปตรวจสอบการเข้าสู่ระบบกับเซิร์ฟเวอร์ผ่าน API
     private void performLogin(String userId, String password) {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
         Call<LoginResponse> call = apiService.login(userId, password);
@@ -147,10 +150,8 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    /**
-     * <<<<< เพิ่มเมธอดนี้เข้ามาใหม่ทั้งหมด >>>>>
-     * เมธอดสำหรับควบคุมการแสดงผลของ ProgressBar และฟอร์ม Login
-     */
+
+     // ฟังก์ชันนี้ใช้สำหรับแสดงหรือซ่อนหน้าโหลด (ProgressBar) ขณะกำลังประมวลผล เช่น ตอนล็อกอิน
     private void showLoading(boolean isLoading) {
         if (isLoading) {
             loadingProgressBar.setVisibility(View.VISIBLE);

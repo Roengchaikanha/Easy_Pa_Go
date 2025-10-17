@@ -1,14 +1,10 @@
-package com.example.easy_pa_go; // ชื่อ package ของคุณ
+package com.example.easy_pa_go;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * คลาสนี้เป็นพิมพ์เขียวสำหรับข้อมูล User ที่ได้รับหลัง Login สำเร็จ
- * ถูกสร้างขึ้นเพื่อรองรับโครงสร้าง JSON ที่ซ้อนกันอยู่ (Nested JSON)
- * เป็นไปตามหลักการ Object-Oriented Programming
- */
+// คลาส UserData ใช้เก็บข้อมูลของผู้ใช้ที่ได้รับจากเซิร์ฟเวอร์หลังล็อกอินสำเร็จ
 class UserData {
-
+    // ระบุว่าข้อมูลจาก JSON "user_id" "first_name" "last_name" และ "major_id" จะถูฏเก็บไว้ใน userId, firstName, lastName และ majorId ตามลำดับ
     @SerializedName("user_id")
     private String userId;
 
@@ -22,6 +18,7 @@ class UserData {
     private String majorId;
 
     // --- Getter methods ---
+    // ใช้เรียกค่าชื่อผู้ใช้ และชื่อ-สกุล ของผู้ใช้
     public String getUserId() {
         return userId;
     }
@@ -40,9 +37,7 @@ class UserData {
 }
 
 
-/**
- * คลาสหลักที่เป็นพิมพ์เขียวสำหรับ JSON ทั้งหมดที่ได้รับจาก login.php
- */
+// คลาส LoginResponse ใช้เก็บผลลัพธ์ที่ได้จาก API login.php
 public class LoginResponse {
 
     @SerializedName("status")
@@ -54,7 +49,7 @@ public class LoginResponse {
     @SerializedName("user")
     private UserData user;
 
-    // --- Getter methods ---
+    // --- Getter methods ใช้เรียกดูค่าที่ได้จาก API ---
     public String getStatus() {
         return status;
     }

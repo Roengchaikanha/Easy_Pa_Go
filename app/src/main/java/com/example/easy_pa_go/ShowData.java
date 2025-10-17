@@ -18,7 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ShowData extends AppCompatActivity {
-
+//ประกาศ Class ShowData
     private ImageView buildingImageView;
     private TextView buildingNameTextView;
     private TextView floorTextView;
@@ -26,7 +26,7 @@ public class ShowData extends AppCompatActivity {
     private TextView roomTypeTextView;
     private TextView capacityTextView;
     private Button goToMapButton;
-
+//ประกาศตัวแปรใช้เชื่อมโยงกับ UI
     private LocationItem currentLocation; // ตัวแปรสำหรับเก็บข้อมูลสถานที่ปัจจุบัน
 
     @Override
@@ -62,11 +62,11 @@ public class ShowData extends AppCompatActivity {
         capacityTextView = findViewById(R.id.capacityTextView);
         goToMapButton = findViewById(R.id.goToMapButton);
     }
-
+    //เชื่อมตัวแปรกับ UI ในไฟล์ .XML
     private void fetchLocationData(String locationId) {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
         Call<LocationResponse> call = apiService.getLocationDetails(locationId);
-
+    //ดึงข้อมูลจาก API ตาม LocationID
         call.enqueue(new Callback<LocationResponse>() {
             @Override
             public void onResponse(Call<LocationResponse> call, Response<LocationResponse> response) {
@@ -97,7 +97,7 @@ public class ShowData extends AppCompatActivity {
             }
         });
     }
-
+//สิ้นสุดการแสดงหน้าของ ShowData
     /**
      * <<<<< เมธอดใหม่สำหรับเปิด Google Maps >>>>>
      */

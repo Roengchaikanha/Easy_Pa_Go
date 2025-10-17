@@ -58,32 +58,46 @@ public class Register extends AppCompatActivity {
      * เมธอดสำหรับจัดการการคลิกปุ่มทั้งหมดในหน้านี้
      */
     private void setupButtonClickListeners() {
-        // ตั้งค่าปุ่ม "ยืนยัน"
+        // ตั้งค่าการคลิกของปุ่ม "ยืนยัน"
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // เมื่อผู้ใช้กดปุ่ม "ยืนยัน" ให้เรียกใช้เมธอด validateAndRegisterUser()
+                // ซึ่งเมธอดนี้จะตรวจสอบข้อมูลและลงทะเบียนผู้ใช้
                 validateAndRegisterUser();
             }
         });
 
-        // ตั้งค่าปุ่ม "กลับไปหน้าเข้าสู่ระบบ"
+        // ตั้งค่าการคลิกของปุ่ม "กลับไปหน้าเข้าสู่ระบบ"
         backToLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // กลับไปหน้า Login และปิดหน้าปัจจุบันทิ้ง
+                // เมื่อผู้ใช้กดปุ่ม "กลับ" ให้ปิด Activity ปัจจุบัน
+                // ทำให้หน้าจอกลับไปหน้า Login ที่อยู่ด้านหลังใน stack
                 finish();
             }
         });
     }
 
+    // ฟังก์ชันนี้ใช้ดึงข้อมูลสาขาวิชาทั้งหมดจากฐานข้อมูลผ่าน API get_majors.php ที่อยู่ในเครื่อง
     private void fetchMajors() {
+        // apiService เพื่อเรียกใช้งาน API
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
+        // สร้างคำสั่งเรียก API getMajors() ซึ่งจะส่ง request ไปที่เซิร์ฟเวอร์
         Call<MajorResponse> call = apiService.getMajors();
+        // ส่ง request แบบ asynchronous (ไม่บล็อก UI) และรอ callback
         call.enqueue(new Callback<MajorResponse>() {
             @Override
             public void onResponse(Call<MajorResponse> call, Response<MajorResponse> response) {
+
+                // ตรวจสอบว่า response สำเร็จ และมีข้อมูล ไม่เป็น null และ status = "success"
                 if (response.isSuccessful() && response.body() != null && "success".equals(response.body().getStatus())) {
+
+                    // ดึงรายการสาขาจาก response มาเก็บใน majorList
                     majorList = response.body().getData();
+
+
+                    // สร้าง List<String> สำหรับเก็บชื่อสาขา
                     List<String> majorNames = new ArrayList<>();
                     for (Major major : majorList) {
                         majorNames.add(major.getMajorName());
@@ -104,10 +118,7 @@ public class Register extends AppCompatActivity {
         });
     }
 
-    /**
-     * <<<<< ส่วนที่ 2: เพิ่มเมธอดนี้เข้ามาใหม่ทั้งหมด >>>>>
-     * เมธอดสำหรับตรวจสอบข้อมูลและเริ่มกระบวนการลงทะเบียน
-     */
+    // ฟังก์ชันนี้ใช้ตรวจสอบข้อมูลที่ผู้ใช้กรอกในหน้า Register และดึงค่าจาก EditText / Spinner เพื่อเตรียมส่งไปสมัครสมาชิก
     private void validateAndRegisterUser() {
         String firstName = firstNameEditText.getText().toString().trim();
         String lastName = lastNameEditText.getText().toString().trim();
