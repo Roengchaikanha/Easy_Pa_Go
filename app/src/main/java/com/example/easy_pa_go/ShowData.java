@@ -16,7 +16,7 @@ import com.google.gson.annotations.SerializedName;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-// import คลาสที่จำเป็นสำหรับการทำงานต่างๆ
+// import คลาสที่จำเป็นสำหรับการทำงานต่าง
 public class ShowData extends AppCompatActivity {
 //ประกาศ Class ShowData
     private ImageView buildingImageView;
