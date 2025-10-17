@@ -57,7 +57,7 @@ public class UserInterface extends AppCompatActivity {
             Toast.makeText(this, "ไม่พบรหัสสาขา", Toast.LENGTH_SHORT).show();
         }
     }
-
+//ดึงข้อมูลตารางวิชาเรียนมาจาก database มาสดงผล
     private void fetchScheduleData(String majorId) {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
         Call<ScheduleResponse> call = apiService.getSchedule(majorId);
@@ -81,63 +81,9 @@ public class UserInterface extends AppCompatActivity {
         });
     }
 
-    /**
-     * <<<<< ส่วนที่เพิ่มเข้ามาใหม่ทั้งหมด >>>>>
-     * เมธอดสำหรับสร้างเมนู (ไอคอนรูปคน) บน Toolbar
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // นำเมนูจากไฟล์ menu_user_interface.xml มาแสดง
-        getMenuInflater().inflate(R.menu.menu_user_interface, menu);
-        return true;
-    }
 
-    /**
-     * <<<<< ส่วนที่เพิ่มเข้ามาใหม่ทั้งหมด >>>>>
-     * เมธอดสำหรับจัดการเมื่อผู้ใช้กดที่เมนู
-     */
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        // ตรวจสอบว่าปุ่มที่ถูกกดคือปุ่ม logout หรือไม่
-        if (item.getItemId() == R.id.action_logout) {
-            // --- เมื่อกดปุ่ม Logout ---
-            showLogoutConfirmationDialog(); // เรียกใช้เมธอดแสดงกล่องข้อความยืนยัน
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
-    /**
-     * <<<<< ส่วนที่เพิ่มเข้ามาใหม่ทั้งหมด >>>>>
-     * เมธอดสำหรับสร้างและแสดงกล่องข้อความยืนยันการออกจากระบบ
-     */
-    private void showLogoutConfirmationDialog() {
-        new AlertDialog.Builder(this)
-                .setTitle("ออกจากระบบ")
-                .setMessage("คุณต้องการออกจากระบบหรือไม่?")
-                .setPositiveButton("ใช่", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // --- ถ้าผู้ใช้กด "ใช่" ---
-                        logoutUser();
-                    }
-                })
-                .setNegativeButton("ไม่", null) // ถ้ากด "ไม่" ก็ไม่ต้องทำอะไร กล่องข้อความจะปิดไปเอง
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
-    }
 
-    /**
-     * <<<<< ส่วนที่เพิ่มเข้ามาใหม่ทั้งหมด >>>>>
-     * เมธอดสำหรับจัดการการออกจากระบบ
-     */
-    private void logoutUser() {
-        // สร้าง Intent เพื่อกลับไปหน้า Login
-        Intent intent = new Intent(UserInterface.this, Login.class);
-        // ตั้งค่า Flag เพื่อล้างหน้าเก่าๆ ทั้งหมดออกจากระบบ (ป้องกันการกดย้อนกลับมาหน้านี้อีก)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish(); // ปิดหน้านี้ทิ้ง
-    }
 
 
     // --- พิมพ์เขียวสำหรับข้อมูล (Model Classes) ---
