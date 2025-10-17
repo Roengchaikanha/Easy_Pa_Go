@@ -36,14 +36,13 @@ public class ShowData extends AppCompatActivity {
 
         initializeViews();
         String locationId = getIntent().getStringExtra("LOCATION_ID");
-
+    //รับค่า LOCATION_ID จาก API
         if (locationId != null && !locationId.isEmpty()) {
             fetchLocationData(locationId);
         } else {
             Toast.makeText(this, "ไม่พบรหัสสถานที่", Toast.LENGTH_SHORT).show();
         }
-
-        // <<<<< ส่วนที่เพิ่มเข้ามาใหม่ >>>>>
+    //ตรวจสอบรหัสสถานที่
         // ตั้งค่าให้ปุ่ม "เปิดแผนที่นำทาง" ทำงาน
         goToMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,21 +65,22 @@ public class ShowData extends AppCompatActivity {
     private void fetchLocationData(String locationId) {
         ApiService apiService = ApiClient.getClient().create(ApiService.class);
         Call<LocationResponse> call = apiService.getLocationDetails(locationId);
-    //ดึงข้อมูลจาก API ตาม LocationID
+    //ดึงข้อมูลสถานที่จาก API ตาม LocationID
         call.enqueue(new Callback<LocationResponse>() {
             @Override
             public void onResponse(Call<LocationResponse> call, Response<LocationResponse> response) {
                 if (response.isSuccessful() && response.body() != null && "success".equals(response.body().getStatus())) {
+                    // ส่งข้อมูลเพื่อให้ API ตอบกลับมา
                     currentLocation = response.body().getData(); // เก็บข้อมูลสถานที่ไว้
 
-                    // นำข้อมูลไปแสดงผล
+                    // แสดงข้อมูลสถานที่
                     buildingNameTextView.setText(currentLocation.getBuildingName());
                     floorTextView.setText("ชั้น: " + currentLocation.getFloor());
                     roomTextView.setText("ห้อง: " + currentLocation.getRoomNumber());
                     roomTypeTextView.setText("ชนิดห้อง: " + currentLocation.getRoomType());
                     capacityTextView.setText("จำนวนที่นั่ง: " + String.valueOf(currentLocation.getCapacity()));
 
-                    // โหลดรูปภาพ
+                    // แสดงรูปภาพสถานที่
                     String imageName = currentLocation.getBuildingImage();
                     if (imageName != null && !imageName.isEmpty()) {
                         String imageUrl = ApiClient.BASE_URL + "images/" + imageName;
@@ -90,6 +90,7 @@ public class ShowData extends AppCompatActivity {
                     Toast.makeText(ShowData.this, "ไม่พบข้อมูลสถานที่", Toast.LENGTH_SHORT).show();
                 }
             }
+                    // ถ้าไม่พบข้อมูลสถานที่ ให้แสดงข้อความ
 
             @Override
             public void onFailure(Call<LocationResponse> call, Throwable t) {
@@ -97,7 +98,7 @@ public class ShowData extends AppCompatActivity {
             }
         });
     }
-//สิ้นสุดการแสดงหน้าของ ShowData
+
     /**
      * <<<<< เมธอดใหม่สำหรับเปิด Google Maps >>>>>
      */
@@ -106,7 +107,7 @@ public class ShowData extends AppCompatActivity {
             Toast.makeText(this, "ไม่มีข้อมูลพิกัดสำหรับสถานที่นี้", Toast.LENGTH_SHORT).show();
             return;
         }
-
+        // ตรวจสอบว่ามีข้อมูลพิกัดหรือไม่
         // สร้าง URI สำหรับส่งให้ Google Maps
         // รูปแบบคือ "google.navigation:q=lat,lng"
         Uri gmmIntentUri = Uri.parse("google.navigation:q=" + currentLocation.getMapCoordinates());
@@ -124,7 +125,7 @@ public class ShowData extends AppCompatActivity {
         }
     }
 
-    // --- พิมพ์เขียวสำหรับข้อมูล (Model Classes) ---
+    // กำหนดโครงสร้างข้อมูลที่รับจาก API
     public static class LocationItem {
         @SerializedName("building_name") private String buildingName;
         @SerializedName("floor") private String floor;
@@ -134,7 +135,7 @@ public class ShowData extends AppCompatActivity {
         @SerializedName("map_coordinates") private String mapCoordinates;
         @SerializedName("building_image") private String buildingImage;
 
-        // Getters
+        // Getters เรียกค่าข้อมูล
         public String getBuildingName() { return buildingName; }
         public String getFloor() { return floor; }
         public String getRoomNumber() { return roomNumber; }
@@ -154,3 +155,8 @@ public class ShowData extends AppCompatActivity {
     }
 }
 
+//คลาสนี้เป็น Activity ที่
+//รับค่า LOCATION_ID มาจาก Database
+//ดึงข้อมูลจาก API
+//แสดงรายละเอียดพร้อมภาพ
+//และเปิด Google Maps ตามพิกัดที่ได้รับ
